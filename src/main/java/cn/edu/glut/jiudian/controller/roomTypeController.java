@@ -2,7 +2,9 @@ package cn.edu.glut.jiudian.controller;
 
 import cn.edu.glut.jiudian.entity.RoomType;
 import cn.edu.glut.jiudian.service.RoomTypeService;
+import com.fasterxml.jackson.databind.util.JSONPObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -31,7 +33,10 @@ public class roomTypeController {
 
     @RequestMapping("addRoomType")
     @ResponseBody
-    public Object addRoomType(RoomType roomType){
+    public Object addRoomType(@RequestParam("typeId") Integer typeId,@RequestParam("type") String type){
+        RoomType roomType = new RoomType();
+        roomType.setTypeId(typeId);
+        roomType.setType(type);
         HashMap<String, String> res = new HashMap<>();
         if (roomTypeService.addRoomType(roomType)) {
             res.put("stateCode", "1");

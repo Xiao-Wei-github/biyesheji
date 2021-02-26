@@ -66,9 +66,8 @@ public class LoginController {
 
     @RequestMapping(value = "/userLoginCheck", method = RequestMethod.POST)
     @ResponseBody
-    public Object userLoginCheck(HttpServletRequest request, User user){
-
-        User user1 = loginService.selectUser(user.getUserName(), user.getUserPwd());
+    public Object userLoginCheck(HttpServletRequest request, Admin admin){
+        User user1 = loginService.selectUser(admin.getAdminName(), admin.getAdminPwd());
 
         HashMap<String, String> res = new HashMap<>();
 

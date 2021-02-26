@@ -10,7 +10,7 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>酒店管理系统</title>
+    <title>软件管理系统</title>
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <script type="text/javascript" src="../js/jquery-3.2.1.js"></script>
     <script type="text/javascript" src="../js/bootstrap.min.js"></script>
@@ -28,7 +28,7 @@
         <div class="container-fluid nav-con">
             <div class="navbar-header">
                 <a class="navbar-brand" href="#" style="padding-top: 1rem; padding-left: 5rem; color: #dfe4e6">
-                    <span style="font-size: 3rem;padding-right: 2rem;letter-spacing: 5px">酒店管理系统</span>
+                    <span style="font-size: 3rem;padding-right: 2rem;letter-spacing: 5px">软件管理系统</span>
                 </a>
             </div>
         </div>
@@ -46,6 +46,13 @@
                 <label for="adminPwd">密码</label>
                 <input type="password" class="form-control" id="adminPwd" name="adminPwd" placeholder="请输入密码">
             </div>
+            <div class="form-group">
+                <label >请选择登陆模式</label>
+                <select id="check">
+                    <option value="1">管理员 </option>
+                    <option selected value="0">用户</option>
+                </select>
+            </div>
             <p style="font-size: 1.2rem; margin-top: -0.3rem; text-align: right; color: red; position: absolute" id="adminLoginInfo"></p>
             <br>
             <button id="adminLoginButton"  class="btn btn-primary btn-block">登陆</button>
@@ -55,28 +62,49 @@
         $("#adminLoginButton").click(function () {
             var adminName = $("#adminName").val();
             var adminPwd = $("#adminPwd").val();
+            var check = $("#check").val();
             if (adminName == '') {
                 $("#adminLoginInfo").text("提示：账号不能为空！");
             } else if (adminPwd == '') {
                 $("#adminLoginInfo").text("提示：密码不能为空！");
             } else {
-                $.ajax({
-                    type: "post",
-                    url: "/adminLoginCheck",
-                    data:{
-                        adminName: adminName,
-                        adminPwd: adminPwd
-                    },
-                    dateType: "json",
-                    success: function (data) {
-                        if (data.stateCode.trim() === "0"){
-                            $("#adminLoginInfo").text("提示：账号或密码错误！");
-                        } else if (data.stateCode.trim() === "1"){
-                            $("#adminLoginInfo").text("提示：登录成功，跳转中....");
-                            window.location.href="admin_main.html";
+                if(check == 1) {
+                    $.ajax({
+                        type: "post",
+                        url: "/adminLoginCheck",
+                        data: {
+                            adminName: adminName,
+                            adminPwd: adminPwd
+                        },
+                        dateType: "json",
+                        success: function (data) {
+                            if (data.stateCode.trim() === "0") {
+                                $("#adminLoginInfo").text("提示：账号或密码错误！");
+                            } else if (data.stateCode.trim() === "1") {
+                                $("#adminLoginInfo").text("提示：登录成功，跳转中....");
+                                window.location.href = "admin_main.html";
+                            }
                         }
-                    }
-                })
+                    })
+                }else {
+                    $.ajax({
+                        type: "post",
+                        url: "/userLoginCheck",
+                        data: {
+                            adminName: adminName,
+                            adminPwd: adminPwd
+                        },
+                        dateType: "json",
+                        success: function (data) {
+                            if (data.stateCode.trim() === "0") {
+                                $("#adminLoginInfo").text("提示：账号或密码错误！");
+                            } else if (data.stateCode.trim() === "1") {
+                                $("#adminLoginInfo").text("提示：登录成功，跳转中....");
+                                window.location.href = "user_main.html";
+                            }
+                        }
+                    })
+                }
             }
         })
     </script>

@@ -156,7 +156,7 @@ CREATE TABLE `t_room` (
   `area` int(11) DEFAULT NULL,
   `introduce` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT '环境优美，LED光影时尚造型格调装饰，装备顶级影音设备，床褥舒适。',
   `photo_url` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT '/img/jiudian4.jpg',
-  `price` decimal(10,2) DEFAULT NULL,
+  `price` int(8) DEFAULT 20000000,
   PRIMARY KEY (`room_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
