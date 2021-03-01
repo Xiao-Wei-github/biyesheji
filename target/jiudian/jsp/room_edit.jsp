@@ -35,7 +35,7 @@
 <div style="position: relative;padding-top: 20px; width: 40%;margin-left: 2%; font-size: 20px">
     <form id="editRoom" >
         <div class="form-group">
-            <label for="roomId">软件编号</label>
+            <label for="roomId">软件名称</label>
             <input type="text" class="form-control" name="roomId" id="roomId" value="${edit.roomId}" disabled>
         </div>
         <div class="form-group">

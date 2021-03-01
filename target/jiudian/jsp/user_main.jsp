@@ -10,7 +10,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
-    <title>酒店管理系统</title>
+    <title>软件管理系统用户端</title>
     <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
     <script type="text/javascript" src="../js/jquery-3.2.1.js"></script>
     <script type="text/javascript" src="../js/bootstrap.min.js"></script>
@@ -232,7 +232,7 @@
 </head>
 <body>
 <div class="header">
-    <p>酒店管理系统</p>
+    <p>软件管理系统用户端</p>
 </div>
 
 <div class="divider"></div>
@@ -242,7 +242,7 @@
     <c:forEach items="${roomTypeList}" var="roomType">
         <a href="#typeId=<c:out value="${roomType.typeId}"></c:out>&type=<c:out value="${roomType.type}"></c:out>" onclick="showRoomListByType(this)" id="typeId<c:out value="${roomType.typeId}"></c:out>">${roomType.type}</a>
     </c:forEach>
-    <a href="#" onclick="showLiuyan()">留言板</a>
+    <a href="#" onclick="showLiuyan()">意见反馈</a>
 </div>
 <c:choose>
     <c:when test="${user != null}">
@@ -273,7 +273,7 @@
                                 data.roomList[i].photoUrl + "\" height=\"230\" width=\"350\"/>\n" +
                             "</div>\n" +
                             "<div class=\"room-msg\">\n" +
-                            "房间号（" + data.roomList[i].roomId + "）\n" +
+                            "软件名称（" + data.roomList[i].roomId + "）\n" +
                             "</div>\n" +
                             "</div>";
                             $("#roomsDisplay").append(str);
@@ -295,10 +295,10 @@
                     success: function (data) {
                         $("#roomImg").attr("src", data.room.photoUrl);
                         $("#roomId").text(data.room.roomId);
-                        $("#roomArea").text(data.room.area + "㎡");
+                        $("#roomArea").text(data.room.area);
                         $("#roomIntroduce").text(data.room.introduce);
                         $("#roomType").text(data.room.roomType);
-                        $("#roomPrice").text(data.room.price + "元/天");
+                        $("#roomPrice").text("发布时间：" + data.room.price);
                         $("#roomsDisplay").hide();
                         $("#roomDetail").show();
                     }
@@ -349,7 +349,7 @@
 </c:choose>
 
 <div class="user-search">
-    <p class="price">价格区间：</p>
+    <p class="price">发布时间搜索：</p>
     <input class="start-price" id="startPrice" type="text" placeholder="50"/>
     <p class="fenge">--</p>
     <input class="end-price" id="endPrice" type="text" placeholder="5000"/>
@@ -381,8 +381,8 @@
                         data.roomList[i].photoUrl + "\" height=\"230\" width=\"350\"/>\n" +
                         "</div>\n" +
                         "<div class=\"room-msg\">\n" +
-                        "<p style=\"float: left; margin-left: 100px;\">房间号（" + data.roomList[i].roomId + "）</p>\n" +
-                        "<p style=\"float: right; margin-right: 8px\">￥"+ data.roomList[i].price +".00</p>" +
+                        "<p style=\"float: left; margin-left: 100px;\">软件名称（" + data.roomList[i].roomId + "）</p>\n" +
+                        "<p style=\"float: right; margin-right: 8px\">"+ data.roomList[i].price +"</p>" +
                         "</div>\n" +
                         "</div>";
                     $("#roomsDisplay").append(str);
@@ -398,7 +398,7 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3 class="panel-title" style="color: #ff9000">
-                    精品客房
+                    已发布软件列表
                 </h3>
             </div>
 
@@ -417,8 +417,8 @@
                     <p>房价：<span id="roomPrice">9999元/天</span></p>
 
                     <div class="comment-msg" style="margin-top: 25px; font-size: 21px">
-                        <a href="#" onclick="readComment()" id="readComment" style="float: left; margin-left: 95px"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>查看评论</a>
-                        <a href="#" onclick="writeComment()" id="writeComment" style="float: right; margin-right: 140px"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span>我要评论</a>
+                        <a href="#" onclick="readComment()" id="readComment" style="float: left; margin-left: 95px"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>查看意见反馈</a>
+                        <a href="#" onclick="writeComment()" id="writeComment" style="float: right; margin-right: 140px"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span>我要反馈意见</a>
                     </div>
 
                     <div id="roomComment"></div>
@@ -519,8 +519,8 @@
                             <img class="img-rounded" onclick="showRoomDetail(${room.roomId})" src="${room.photoUrl}" height="230" width="350"/>
                         </div>
                         <div class="room-msg">
-                            <p style="float: left; margin-left: 100px">房间号（${room.roomId}）</p>
-                            <p style="float: right; margin-right: 8px">￥${room.price}</p>
+                            <p style="float: left; margin-left: 100px">软件名称（${room.roomId}）</p>
+                            <p style="float: right; margin-right: 8px">发布时间：${room.price}</p>
                         </div>
                     </div>
                 </c:forEach>

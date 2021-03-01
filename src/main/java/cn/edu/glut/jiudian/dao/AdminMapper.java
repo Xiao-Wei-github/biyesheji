@@ -20,4 +20,10 @@ public interface AdminMapper {
 
 
     Admin selectAdmin(@Param("adminName") String adminName, @Param("adminPwd") String adminPwd);
+
+    boolean updatePassword(Admin admin);
+
+    Admin adminCheck(Admin admin);
+
+    boolean addAdmin(Admin admin);
 }

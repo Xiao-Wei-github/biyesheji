@@ -33,6 +33,21 @@
     where admin_name = #{adminName,jdbcType=VARCHAR}
     and admin_pwd = #{adminPwd}
   </select>
+  <update id="updatePassword" parameterType="cn.edu.glut.jiudian.entity.Admin">
+    update t_admin
+    set admin_pwd = #{adminPwd,jdbcType=VARCHAR}
+    where admin_name = #{adminName,jdbcType=VARCHAR}
+  </update>
+  <select id="adminCheck" resultType="Admin" parameterType="cn.edu.glut.jiudian.entity.Admin">
+    select *
+    from t_admin
+    where admin_name = #{adminName,jdbcType=VARCHAR}
+  </select>
+  <insert id="addAdmin" parameterType="cn.edu.glut.jiudian.entity.Admin" >
+    insert into t_admin
+    (admin_name,admin_pwd)
+    values (#{adminName,jdbcType=VARCHAR},#{adminPwd,jdbcType=VARCHAR})
+  </insert>
 
   <!--<select id="selectAll" resultMap="BaseResultMap">-->
     <!--select admin_id, admin_name, admin_pwd-->

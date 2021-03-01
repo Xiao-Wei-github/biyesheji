@@ -148,6 +148,16 @@
         $("#display").html("");
         $("#display").load('ruzhu_add.html');
     }
+
+    function passwordModify(){
+        $("#display").html("");
+        $("#display").load('password_modify.html');
+    }
+
+    function adminAdd(){
+        $("#display").html("");
+        $("#display").load('admin_add.html')
+    }
 </script>
 <div class="management">
     <div class="menu-main">
@@ -159,7 +169,7 @@
                     </div>
                     <div id="div1" class="collapse in">
                         <div class="panel-body">
-                            <li><a href="#">修改密码</a></li>
+                            <li><a href="#" onclick="passwordModify()">修改密码</a></li>
                         </div>
                     </div>
                 </div>
@@ -213,12 +223,11 @@
 
                 <div class="panel panel-default">
                     <div data-toggle="collapse" data-target="#div6" class="panel-heading">
-                        <h3 class="panel-title text-center">公告信息管理</h3>
+                        <h3 class="panel-title text-center">注册管理员</h3>
                     </div>
                     <div id="div6" class="collapse in">
                         <div class="panel-body">
-                            <li><a href="#">公告信息管理</a></li>
-                            <li><a href="#">公告信息添加</a></li>
+                            <li><a href="#" onclick="adminAdd()">注册管理员</a></li>
                         </div>
                     </div>
                 </div>

@@ -11,28 +11,60 @@
     <title>密码修改</title>
 </head>
 <body>
-            <table width='100%' cellspacing='1' cellpadding='3' bgcolor='#CCCCCC' class="tablewidth">
+        </table>
+        <div class="form-group" style="width: 140px;">
+            <label for="name">用户名</label>
+            <input type="text" class="form-control" name="name" id="name" value="${edit.name}" >
+        </div>
+            <div class="form-group" style="width: 140px;">
+                <label for="pasw">旧密码</label>
+                <input type="password" class="form-control" name="pasw" id="pasw" value="${edit.pasw}" >
+            </div>
+
+            <div class="form-group" style="width: 140px;">
+                <label for="jpasw">新密码</label>
+                <input type="password" class="form-control" name="jpasw" id="jpasw" value="${edit.jpasw}">
+            </div>
+
+            <div class="form-group" style="width: 140px;">
+                <label for="jpasws">再次输入新密码</label>
+                <input type="password" class="form-control" name="jpasws" id="jpasws" value="${edit.jpasws}">
+            </div>
 
 
-                <tr>
-                    <td align="right" width="35%">以前的密码:</td>
-                    <td width=65%><input name="oldPassword" type=password /></td>
-                </tr>
-                <tr>
-                    <td align="right" width="35%">输入新密码:</td>
-                    <td width=65%><input name="newPassword" type=password /></td>
-                </tr>
-                <tr>
-                    <td align="right" width="35%">再输入新密码:</td>
-                    <td width=65%><input name="newPassword2" type=password /></td>
-                </tr>
-                <tr bgcolor='#FFFFFF'>
-                    <td colspan="4" align="center">
-                        <input type='submit' name='button' value='修改' >
-                        &nbsp;&nbsp;
-                    </td>
-                </tr>
+            <input type="button" id="password" value="确认修改" class="btn btn-success btn-sm" class="text-left">
 
-            </table>
+        <script>
+            $("#password").click(function () {
+                if ($("#pasw").val() == '' || $("#jpasw").val() == '' ||
+                    $("#jpasws").val() == '' || $("#name").val() == '') {
+                    alert("请填入完整信息！");
+                } else if ($("#jpasw").val() != $("#jpasws").val()) {
+                    alert("两次输入密码不一致！");
+                }else {
+                    var jpasw = $("#jpasw").val();
+                    var name = $("#name").val();
+                    var password = $("#pasw").val();
+                    $.ajax({
+                        type: 'post',
+                        url: 'passwordMdify',
+                        data: {
+                            adminPwd: jpasw,
+                            adminName: name,
+                            password: password,
+                        },
+                        dataType: 'json',
+                        success: function (data) {
+                            if (data.stateCode.trim() === '1'){
+                                alert("修改成功！");
+                                window.location.href='adminLogin.html';
+                            } else if (data.stateCode.trim() === '0'){
+                                alert("旧密码输入错误！");
+                            }
+                        }
+                    })
+                }
+            })
+        </script>
 </body>
 </html>
