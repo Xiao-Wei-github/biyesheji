@@ -34,7 +34,7 @@
 <%--</div>--%>
 <%--</c:if>--%>
 <div style="position: relative;padding-top: 20px; width: 40%;margin-left: 2%; font-size: 20px">
-    <form  id="addRoom">
+    <form  id="addRoom" >
         <div class="form-group">
             <label for="roomId">软件编号</label>
             <input type="text" class="form-control" name="roomId" id="roomId" placeholder="请输入软件编号">
@@ -54,8 +54,8 @@
         </div>
 
         <div class="form-group">
-            <label for="photoUrl">图标</label>
-            <input type="file" id="photoUrl">
+            <label for="area">软件名称</label>
+            <input type="text" class="photoUrl" name="photoUrl" id="photoUrl" placeholder="请输入软件名称">
         </div>
 
         <div class="form-group">
@@ -74,7 +74,7 @@
             $("#addRoomButton").click(function () {
                 if ($("#roomId").val() == '' || $("#roomType").val() == '' ||
                     $("#introduce").val() == '' || $("#area").val() == '' ||
-                    $("#price").val() == '') {
+                    $("#price").val() == '' || $("#photoUrl").val() == ''){
                     alert("请填入完整软件信息！");
                 } else {
                     var roomId = $("#roomId").val();
@@ -82,15 +82,17 @@
                     var introduce = $("#introduce").val();
                     var area = $("#area").val();
                     var price = $("#price").val();
+                    var photoUrl = $("#photoUrl").val();
                     $.ajax({
                         type: 'post',
                         url: 'doRoomAdd',
-                        data: {
-                            roomId: roomId,
-                            roomType: roomType,
-                            introduce: introduce,
-                            area: area,
-                            price: price,
+                        data:{
+                            roomId:roomId,
+                            roomType:roomType,
+                            introduce:introduce,
+                            area:area,
+                            price:price,
+                            photoUrl:photoUrl,
                         },
                         dataType: 'json',
                         success: function (data) {
@@ -107,6 +109,7 @@
                 }
 
             })
+
         </script>
     </form>
 </div>

@@ -44,8 +44,8 @@ public class UserController {
         mav.addObject("roomTypeList", roomTypeList);
         List<Room> roomList = roomService.selectAll();
         mav.addObject("roomList", roomList);
-        List<Notice> noticeList = noticeService.selectAll();
-        mav.addObject("noticeList", noticeList);
+        //List<Notice> noticeList = noticeService.selectAll();
+        //mav.addObject("noticeList", noticeList);
         return mav;
     }
 

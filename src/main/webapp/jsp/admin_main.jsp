@@ -25,7 +25,7 @@
         }
         .menu-main{
             float: left;
-            background-color: #22a837;
+            background-color: cornflowerblue;
             height: 800px;
             width: 315px;
             padding: 15px;
@@ -33,7 +33,7 @@
             border-radius: 8px;
         }
         .menu-body{
-            background-color: #22a837;
+            background-color: cornflowerblue;
             height: 770px;
             width: 285px;
             overflow: scroll
@@ -46,7 +46,7 @@
             margin-left: 350px;
         }
         #list li a{
-            background-color:#22a837;
+            background-color:cornflowerblue;
             font-size: 10px;
             margin-top: 8px;
             margin-left: 10px;
@@ -94,7 +94,7 @@
 </head>
 <body>
 
-<nav class="navbar" style="background-color: #22a837; margin-top: 0px">
+<nav class="navbar" style="background-color: cornflowerblue; margin-top: 0px">
     <div class="container-fluid">
         <div class="navbar-header">
             <p id="title">软件管理系统</p>
@@ -232,7 +232,7 @@
                     </div>
                 </div>
 
-                <div class="panel panel-default">
+            <!--    <div class="panel panel-default">
                     <div data-toggle="collapse" data-target="#div7" class="panel-heading">
                         <h3 class="panel-title text-center">意见反馈-管理</h3>
                     </div>
@@ -242,7 +242,7 @@
                         </div>
                     </div>
                 </div>
-
+             -->
                 <div class="panel panel-default">
                     <div data-toggle="collapse" data-target="#div8" class="panel-heading">
                         <h3 class="panel-title text-center">安全退出系统</h3>

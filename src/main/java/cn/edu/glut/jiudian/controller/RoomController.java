@@ -4,18 +4,30 @@ import cn.edu.glut.jiudian.entity.Room;
 import cn.edu.glut.jiudian.entity.RoomType;
 import cn.edu.glut.jiudian.service.RoomService;
 import cn.edu.glut.jiudian.service.RoomTypeService;
+import org.apache.commons.fileupload.FileItemFactory;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import com.google.common.io.ByteStreams;
 
-import javax.swing.text.AbstractDocument;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.math.BigDecimal;
-import java.util.HashMap;
-import java.util.List;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * @author stone(huangshizhang) at 2019-06-08 10:49
@@ -36,19 +48,6 @@ public class RoomController {
     public Object rooms(@RequestParam("roomType") String roomType) {
         HashMap<String, List<Room>> res = new HashMap();
         List<Room> roomList = roomService.selectByRoomType(roomType);
-        res.put("roomList", roomList);
-        return res;
-    }
-
-    @RequestMapping("roomsByPrice")
-    @ResponseBody
-    public Object rooms(@RequestParam("startPrice") String startPrice,
-                        @RequestParam("endPrice") String endPrice) {
-        BigDecimal startPrice1 = BigDecimal.valueOf(Double.parseDouble(startPrice));
-        BigDecimal endPrice1 = BigDecimal.valueOf(Double.parseDouble(endPrice));
-
-        HashMap<String, List<Room>> res = new HashMap();
-        List<Room> roomList = roomService.selectByPrice(startPrice1, endPrice1);
         res.put("roomList", roomList);
         return res;
     }

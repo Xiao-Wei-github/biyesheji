@@ -21,8 +21,6 @@ public interface RoomMapper {
 
     List<Room> selectByRoomType(String roomType);
 
-    List<Room> selectByPrice(@Param("startPrice") BigDecimal startPrice, @Param("endPrice") BigDecimal endPrice);
-
     int exists(String roomId);
 
     List<Room> selectNotInRuZhu();

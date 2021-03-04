@@ -40,9 +40,9 @@
                     反馈意见管理
                 </h4>
             </div>
-            <div class="modal-body" id="commentDisplay" style="height: 400px; overflow: scroll">
+            <div class="modal-body" id="commentDisplay" style="height: 400px ; overflow: scroll">
                 <c:forEach items="${commentList}" var="commemt">
-                    <div style="background-color: red; height: 50px">
+                    <div style="background-color: #faebcc; height: 50px">
                         <p style="float: top">
                             <fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${commemt.releaseTime}" timeZone="GMT+8"/>
                             <span class="col-sm-offset-1">用户:</span>
@@ -53,7 +53,7 @@
                             <span style="margin-left: 5px">${commemt.content}</span>
                         </p>
                     </div>
-                    <div style="background-color: blue; height: 30px; float: bottom">
+                    <div style="background-color: #faebcc; height: 30px; float: bottom">
                         <button type="button" id="deleteCommentButton" onclick="deleteComment(${commemt.serNum}, '${commemt.roomId}')" class="btn btn-danger btn-sm" style="float: right; margin-right: 10px">
                             删除
                         </button>
@@ -104,7 +104,7 @@
                         "   </button>\n" +
                         "</div>\n" +
                         "\n" +
-                        "<div style=\"background-color: #2e6da4; height: 1px; margin-top: 10px\"></div>";
+                        "<div style=\"background-color: #faebcc; height: 1px; margin-top: 10px\"></div>";
                     $("#commentDisplay").append(str);
                 }
             }

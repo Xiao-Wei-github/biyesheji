@@ -14,8 +14,6 @@ public interface RoomService {
 
     List<Room> selectByRoomType(String roomType);
 
-    List<Room> selectByPrice(BigDecimal startPrice, BigDecimal endPrice);
-
     Room selectByRoomId(String roomId);
 
     boolean exists(String roomId);

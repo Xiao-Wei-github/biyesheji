@@ -21,7 +21,7 @@
         }
     </style>
 </head>
-<body background="../img/jiudian2.jpg" style=" background-repeat:no-repeat ; background-size:100% 100%; background-attachment: fixed;">
+<body background="../img/index.jpg" style=" background-repeat:no-repeat ; background-size:100% 100%; background-attachment: fixed;">
 
 <div class="container-fluid" style="padding: 0em">
     <nav class="navbar navbar-inverse">
@@ -93,12 +93,6 @@
                                             <label for="registerQQ" class="col-sm-2 col-sm-offset-2 control-label">QQ号码:</label>
                                             <div class="col-sm-6">
                                                 <input type="text" class="form-control" id="registerQQ">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="registerPhotoUrl" class="col-sm-2 col-sm-offset-2 control-label">头像:</label>
-                                            <div class="col-sm-6" style="margin-top: 8px">
-                                                <input type="file" id="registerPhotoUrl">
                                             </div>
                                         </div>
                                         <div class="form-group">

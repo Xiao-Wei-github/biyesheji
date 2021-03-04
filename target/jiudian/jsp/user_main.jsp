@@ -19,10 +19,10 @@
             width: 1600px;
             line-height: 100px;
             height: 100px;
-            margin-left: 160px;
+            margin-left: 40px;
             margin-top: 60px;
             font-size: 60px;
-            background-color: #ff5000;
+            background-color: green;
             color: #ffffff;
             text-align: center;
             border-radius: 8px 8px 0px 0px
@@ -30,20 +30,20 @@
         .divider{
             width: 1600px;
             height: 3px;
-            margin-left: 160px;
+            margin-left: 40px;
             background-color: #ffffff;
         }
         .user-menu{
             width: 1600px;
-            line-height: 45px;
+            line-height: 40px;
             height: 45px;
-            margin-left: 160px;
-            background-color: #ff5000;
+            margin-left: 40px;
+            background-color: green;
         }
         .user-menu a{
             font-size: 20px;
             color: #000;
-            margin-left: 20px;
+            margin-left: 40px;
         }
 
         .user-search{
@@ -98,7 +98,7 @@
         .user-body{
             width: 1600px;
             height: 1000px;
-            margin-left: 160px;
+            margin-left: 40px;
             display: flex;
         }
         .user-body .room-list{
@@ -114,9 +114,23 @@
             margin-top: 30px;
         }
 
-        .user-body .room-list .room-info .img-info{
+        .user-body .room-list .room-info {
             height: 230px;
         }
+
+        .img-info{
+            height: 140px;
+
+        }
+
+        .room-msg{
+            height: 40px;
+            line-height: 40px;
+            color: #000000;
+            font-size: 20px;
+            text-align: center;
+        }
+
         .user-body .room-list .room-info .room-msg{
             height: 40px;
             line-height: 40px;
@@ -142,7 +156,7 @@
         }
 
         #userLoginInfo{
-            position: absolute
+            position: absolute;
             font-size: 1.2rem;
             margin-left: 95px;
             margin-top: -0.5rem;
@@ -160,7 +174,7 @@
             border-radius: 0px 0px 8px 8px
         }
 
-        .user-body .room-list .panel .room-detail .img-detail{
+        .user-body .room-list .panel .room-detail .img-detail {
             float: left;
             height: 428px;
             width: 600px;
@@ -169,7 +183,15 @@
             /*border: 1px solid #bbb;*/
         }
 
-        .user-body .room-list .panel .room-detail .right-body{
+        .right-body{
+            position: absolute;
+            margin-top: 35px;
+            height: 650px;
+            width: 500px;
+            left: 30px;
+        }
+
+        .user-body .room-list .panel .room-detail {
             float: right;
             height: 650px;
             width: 500px;
@@ -239,10 +261,6 @@
 
 <div class="user-menu">
     <a href="/user_main.html">网站首页</a>
-    <c:forEach items="${roomTypeList}" var="roomType">
-        <a href="#typeId=<c:out value="${roomType.typeId}"></c:out>&type=<c:out value="${roomType.type}"></c:out>" onclick="showRoomListByType(this)" id="typeId<c:out value="${roomType.typeId}"></c:out>">${roomType.type}</a>
-    </c:forEach>
-    <a href="#" onclick="showLiuyan()">意见反馈</a>
 </div>
 <c:choose>
     <c:when test="${user != null}">
@@ -267,13 +285,13 @@
                         var str = "";
                         $("#roomsDisplay").html("");
                         for (var i = 0; i < data.roomList.length; i++){
-                            str = "<div class=\"room-info\">\n" +
+                            str = "<div class=\"\"room-info\"\">\n" +
                                 "<div class=\"img-info\">\n" +
-                                "<img class=\"img-rounded\" onclick=\"showRoomDetail(" + data.roomList[i].roomId + ")\" src=\"" +
+                                "<a class=\"img-rounded\" onclick=\"showRoomDetail(" + data.roomList[i].roomId + ")\" src=\"" +
                                 data.roomList[i].photoUrl + "\" height=\"230\" width=\"350\"/>\n" +
                             "</div>\n" +
                             "<div class=\"room-msg\">\n" +
-                            "软件名称（" + data.roomList[i].roomId + "）\n" +
+                            "软件编号：（" + data.roomList[i].roomId + "）\n" +
                             "</div>\n" +
                             "</div>";
                             $("#roomsDisplay").append(str);
@@ -293,12 +311,12 @@
                     },
                     dataType: "json",
                     success: function (data) {
-                        $("#roomImg").attr("src", data.room.photoUrl);
+                        $("#photoUrl").text(data.room.photoUrl);
                         $("#roomId").text(data.room.roomId);
                         $("#roomArea").text(data.room.area);
                         $("#roomIntroduce").text(data.room.introduce);
                         $("#roomType").text(data.room.roomType);
-                        $("#roomPrice").text("发布时间：" + data.room.price);
+                        $("#roomPrice").text(data.room.price);
                         $("#roomsDisplay").hide();
                         $("#roomDetail").show();
                     }
@@ -347,52 +365,6 @@
         </script>
     </c:otherwise>
 </c:choose>
-
-<div class="user-search">
-    <p class="price">发布时间搜索：</p>
-    <input class="start-price" id="startPrice" type="text" placeholder="50"/>
-    <p class="fenge">--</p>
-    <input class="end-price" id="endPrice" type="text" placeholder="5000"/>
-    <button id="searchButton">
-        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-        <span style="font-size: 16px;margin-left: 2px; color: #000000">搜索</span>
-    </button>
-    <a><span class="glyphicon glyphicon-home" aria-hidden="true"></span>个人中心</a>
-</div>
-<script>
-    $("#searchButton").click(function () {
-        var startPrice = $("#startPrice").val();
-        var endPrice = $("#endPrice").val();
-        $.ajax({
-            type: "post",
-            url: "roomsByPrice",
-            data: {
-                startPrice: startPrice,
-                endPrice: endPrice
-            },
-            dateType: "json",
-            success: function (data) {
-                var str = "";
-                $("#roomsDisplay").html("");
-                for (var i = 0; i < data.roomList.length; i++){
-                    str = "<div class=\"room-info\">\n" +
-                        "<div class=\"img-info\">\n" +
-                        "<img class=\"img-rounded\" onclick=\"showRoomDetail(" + data.roomList[i].roomId + ")\" src=\"" +
-                        data.roomList[i].photoUrl + "\" height=\"230\" width=\"350\"/>\n" +
-                        "</div>\n" +
-                        "<div class=\"room-msg\">\n" +
-                        "<p style=\"float: left; margin-left: 100px;\">软件名称（" + data.roomList[i].roomId + "）</p>\n" +
-                        "<p style=\"float: right; margin-right: 8px\">"+ data.roomList[i].price +"</p>" +
-                        "</div>\n" +
-                        "</div>";
-                    $("#roomsDisplay").append(str);
-                }
-                $("#roomDetail").hide();
-                $("#roomsDisplay").show();
-            }
-        })
-    })
-</script>
 <div class="user-body">
     <div class="room-list">
         <div class="panel panel-default">
@@ -403,97 +375,27 @@
             </div>
 
             <div class="room-detail" id="roomDetail">
-                <div class="img-detail" id="imgDetail">
-                    <img id="roomImg" src="/img/jiudian4.jpg" class="img-rounded" height="428" width="600"/>
-                </div>
-                <div class="right-body" id="rightMsg">
-                    <div style="margin-top: 90px"></div>
-                    <p>房间号：<span id="roomId">9999</span></p>
-                    <p>类型：<span id="roomType">标准房</span></p>
-                    <p>简介：</p>
-                    <p><textarea id="roomIntroduce" class="form-control" rows="3" style="background-color: white; font-size: 16px" disabled>环境优美，床褥舒适</textarea></p>
+                <div class="right-body" id="rightMsg" >
+                    <div style="margin-top: 15px"></div>
+                    <p>软件名称：<span id="photoUrl">无</span></p>
+                    <p>软件编号：<span id="roomId">9999</span></p>
+                    <p>软件类型：<span id="roomType">社交类</span></p>
+                    <p>软件描述：</p>
+                    <p><textarea id="roomIntroduce" class="form-control" rows="4" style="background-color: white; font-size: 16px" disabled>管理员未添加任何描述，详情联系QQ：896751366</textarea></p>
 
-                    <p>面积：<span id="roomArea">100㎡</span></p>
-                    <p>房价：<span id="roomPrice">9999元/天</span></p>
+                    <p>版本号：<span id="roomArea">100</span></p>
+                    <p>发布时间：<span id="roomPrice">20200101</span></p>
 
                     <div class="comment-msg" style="margin-top: 25px; font-size: 21px">
-                        <a href="#" onclick="readComment()" id="readComment" style="float: left; margin-left: 95px"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>查看意见反馈</a>
-                        <a href="#" onclick="writeComment()" id="writeComment" style="float: right; margin-right: 140px"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span>我要反馈意见</a>
+                        <a href="#" onclick="readComment()" id="readComment" style="position: absolute; margin-left: 100px"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>查看意见反馈</a>
+                        <a href="#" onclick="writeComment()" id="writeComment" style="float: right; margin-right: 85px"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span>我要反馈意见</a>
                     </div>
 
                     <div id="roomComment"></div>
                     <div id="editRoomComment"></div>
 
 
-                    <div class="btn-group" style="margin-top: 65px">
-                        <div class="col-xs-offset-2 col-xs-7">
-                            <!-- 按钮触发模态框 -->
-                            <button type="button" id="reserveButton" data-toggle="modal" data-target="#myModal">预定</button>
-                            <!-- 模态框（Modal） -->
-                            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×
-                                            </button>
-                                            <h4 class="modal-title" id="myModalLabel">
-                                                客房预定
-                                            </h4>
-                                        </div>
-                                        <div class="modal-body">
-                                            <div class="input-group">
-                                                <label for="phone" class="control-label">联系方式:</label>
-                                                <input type="text" class="form-control" id="phone">
-                                            </div>
-                                            <br>
-                                            <div class="input-group">
-                                                <label for="countDate" class="control-label">预定天数:</label>
-                                                <input type="text" class="form-control" id="countDate">
-                                            </div>
-                                            <br>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" onclick="exitModal()" class="btn btn-default" data-dismiss="modal">
-                                                取消
-                                            </button>
-                                            <button type="button" id="reserveSubmitButton" class="btn btn-primary">
-                                                提交
-                                            </button>
-                                            <script type="text/javascript">
-                                                $("#reserveSubmitButton").click(function () {
-                                                    var roomId1 = $("#roomId").text();
-                                                    var userName = $("#sessionUserName").text();
-                                                    var countDate = $("#countDate").val();
-                                                    var phone = $("#phone").val();
-                                                    //alert(roomId1);
-                                                    $.ajax({
-                                                        type: 'post',
-                                                        url: "reservation",
-                                                        data: {
-                                                            userName: userName,
-                                                            roomId: roomId1,
-                                                            countDate: countDate,
-                                                            phone: phone,
-                                                        },
-                                                        dataType: 'json',
-                                                        success: function (data) {
-                                                            if (data.reservationState.trim() === '0') {
-                                                                alert(data.msg);
-                                                            } else if (data.reservationState.trim() === '1') {
-                                                                alert(data.msg);
-                                                            } else if (data.reservationState.trim() === '2') {
-                                                                alert(data.msg);
-                                                            }
-                                                            setTimeout($('#myModal').modal('hide'), 500);
-                                                        }
-                                                    })
-                                                })
-                                            </script>
-                                        </div>
-                                    </div><!-- /.modal-content -->
-                                </div><!-- /.modal-dialog -->
-                            </div><!-- /.modal -->
-                        </div>
+                    <div class="btn-group" style="margin-top: 85px;left: 80px">
                         <div class="col-xs-12">
                             <button type="button" id="backRoomList" onclick="backRoomList()">返回</button>
                         </div>
@@ -516,11 +418,14 @@
                 <c:forEach items="${roomList}" var="room">
                     <div class="room-info">
                         <div class="img-info">
-                            <img class="img-rounded" onclick="showRoomDetail(${room.roomId})" src="${room.photoUrl}" height="230" width="350"/>
+                            <!--<a class="img-rounded" onclick="showRoomDetail(${room.roomId})" src="${room.photoUrl}" height="230" width="350"/>-->
+                            <p style="background-color:whitesmoke;font-family:arial;color:cornflowerblue;font-size:35px;text-align:center">
+                                <a href="#" onclick="showRoomDetail(${room.roomId})">${room.photoUrl}</a>
+                            </p>
                         </div>
-                        <div class="room-msg">
-                            <p style="float: left; margin-left: 100px">软件名称（${room.roomId}）</p>
-                            <p style="float: right; margin-right: 8px">发布时间：${room.price}</p>
+                        <div class="room-msg" >
+                            <p style="float: left; margin-left: 50px">软件编号：（${room.roomId}）</p>
+                            <p style="float: left; margin-left: 50px">发布时间：${room.price}</p>
                         </div>
                     </div>
                 </c:forEach>
@@ -613,12 +518,7 @@
                                                             <input type="password" class="form-control" id="registerQQ">
                                                         </div>
                                                     </div>
-                                                    <div class="form-group">
-                                                        <label for="registerPhotoUrl" class="col-sm-2 col-sm-offset-2 control-label">头像:</label>
-                                                        <div class="col-sm-6" style="margin-top: 8px">
-                                                            <input type="file" id="registerPhotoUrl">
-                                                        </div>
-                                                    </div>
+
                                                     <div class="form-group">
                                                         <label for="registerAddress" class="col-sm-2 col-sm-offset-2 control-label">家庭住址:</label>
                                                         <div class="col-sm-6">

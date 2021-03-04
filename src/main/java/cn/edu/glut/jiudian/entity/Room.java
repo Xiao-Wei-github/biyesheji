@@ -7,13 +7,13 @@ public class Room {
 
     private String roomType;
 
-    private Integer area;
+    private String area;
 
     private String introduce;
 
     private String photoUrl;
 
-    private BigDecimal price;
+    private int price;
 
     public String getRoomId() {
         return roomId;
@@ -31,11 +31,11 @@ public class Room {
         this.roomType = roomType == null ? null : roomType.trim();
     }
 
-    public Integer getArea() {
+    public String getArea() {
         return area;
     }
 
-    public void setArea(Integer area) {
+    public void setArea(String area) {
         this.area = area;
     }
 
@@ -55,11 +55,11 @@ public class Room {
         this.photoUrl = photoUrl == null ? null : photoUrl.trim();
     }
 
-    public BigDecimal getPrice() {
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(BigDecimal price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 }

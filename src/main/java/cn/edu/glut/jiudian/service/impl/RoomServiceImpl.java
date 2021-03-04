@@ -29,10 +29,6 @@ public class RoomServiceImpl implements RoomService {
         return roomMapper.selectByRoomType(roomType);
     }
 
-    @Override
-    public List<Room> selectByPrice(BigDecimal startPrice, BigDecimal endPrice) {
-        return roomMapper.selectByPrice(startPrice, endPrice);
-    }
 
     @Override
     public Room selectByRoomId(String roomId) {
